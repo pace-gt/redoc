@@ -1,0 +1,63 @@
+# Running {{ module|title }} on PACE Systems
+This document will walk you through a short example using {{ module }} on PACE.
+
+{% if module_help %}
+## What is {{ module }}?
+You can show a simple description of {{ module }} by running `module help {{ module }}`:
+
+    {{ module_help|indent }}
+{% endif %}
+
+{% if source_files %}
+## Source code
+This example uses the following source code files.
+{% for source_file in source_files %}
+1. {{ source_file }}
+    You can copy this source file to your current working directory by running `cp {{ repository }}/{{ module }}/{{ source_file }} .`.
+    File text:
+
+        {{ include_src_file(source_file)|indent|indent }}
+{% endfor %}
+{% endif %}
+
+{% if makefile %}
+## Makefile
+This example uses a Makefile. You can copy it to your current working directory by running `cp {{ repository }}/{{ module }}/Makefile .`.
+Makefile text:
+
+    {{ include_src_file(makefile)|indent }}
+{% endif %}
+
+{% if input_files %}
+## Input files
+This example uses the following input files.
+{% for input_file in input_files %}
+1. {{ input_file }}
+    You can copy this input file to your current working directory by running `cp {{ repository }}/{{ module }}/{{ input_file }} .`.
+    File text:
+
+        {{ include_src_file(input_file)|indent|indent }}
+{% endfor %}
+{% endif %}
+
+{% if input_directories %}
+## Input directories
+This example uses the following input directories.
+{% for input_directory in input_directories %}
+1. {{ input_directory }}
+    You can copy this input directory to your current working directory by running `cp -r {{ repository }}/{{ module }}/{{ input_directory }} .`.
+    Contents:
+
+    {{ include_input_dir(input_directory)|indent }}
+{% endfor %}
+{% endif %}
+
+## Running the example
+Run the following commands. Remember that in order to execute this example on compute nodes, you should submit these commands in a PBS script or queue into an interactive session (see Job Submission Overview).
+
+    {{ run_commands|indent }}
+
+{% if attribution %}
+## Attribution
+This example comes from [{{ attribution }}]({{ attribution }}).
+{% endif %}
