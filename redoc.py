@@ -246,7 +246,6 @@ def include_src_file(src_file):
         line_num += 1
     if limit_reached:
         ret_lines.append('.\n.\n.\n')
-        ret_lines.append(line)
     return ''.join(ret_lines)
 
 
@@ -286,7 +285,10 @@ populated = template.render(
     run_commands=run_commands,
     attribution=attribution
 )
-output_file_name = 'populated_examples/{}.md'.format(module)
+output_dir_name = 'populated_examples'
+if not os.path.exists(output_dir_name):
+    os.makedirs(output_dir_name)
+output_file_name = '{}/{}.md'.format(output_dir_name, module)
 if os.path.exists(output_file_name):
     os.remove(output_file_name)
 writer = open(output_file_name, 'w')
