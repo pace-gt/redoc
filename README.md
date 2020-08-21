@@ -53,7 +53,7 @@ Each markdown file created by Redoc has the following sections, if relevant:
 - **Module description:** The description displayed if a user runs `module help <module>`.
 - **Files:** Enumerates the files necessary to run the example,
     as well as instructions for how to access them.
-    It distinguishes between source code files, Makefiles, and other general input files.
+    Distinguishes between source code files, Makefiles, and other general input files.
 - **Commands to run example:** Commands for loading the relevant module(s), compiling any necessary code,
     and running the example. Complete with comments.
 - **Attribution:** A link to the source of the example, if provided to the Reframe sanity check
