@@ -1,0 +1,24 @@
+before_script:
+  - python --version
+#  - which flake8
+#  - which shellcheck
+
+stages:
+  - Static Shell Analysis
+  - Static Python Analysis
+
+flake8:
+  stage: Static Python Analysis
+  script:
+  - echo "Testing using flake8."
+  - find ./bin -type f -exec grep -El '^#!(.*/|.*env +)(python)' {} \; | xargs flake8 --max-line-length=120 
+  allow_failure: true
+  tags: [flake8]
+
+shellcheck:
+  stage: Static Shell Analysis
+  script:
+  - echo "Testing using shellcheck."
+  - find ./ -type f -exec grep -El '^#!(.*/|.*env +)(sh|bash|ksh)' {} \; | xargs shellcheck
+  allow_failure: true
+  tags: [shellcheck]
