@@ -12,7 +12,7 @@ it must be instructed to load the module and execute an example using its functi
 which may involve compiling source code or running a program.
 This is called a sanity check.
 
-Many HPC clusters also wish to provice their users with documentation for each software module.
+Many HPC clusters also wish to provice their users with a guide or documentation for each software module.
 This documentation might instruct them to load the module and walk them through an example
 using its functionality- quite possibly the same example that was used for the Reframe sanity check.
 
