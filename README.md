@@ -27,6 +27,8 @@ This provides several advantages over creating user documentation for modules by
 - **The examples are more robust.** Because the usage examples shown in the Redoc-generated documentation are also
     exactly carried out in Reframe sanity checks, you can be sure that they will work when users try them
     as long as the checks continue to pass.
+- **The documentation is more cohesive.** By editing the markdown template and re-running Redoc,
+    it is easy to introduce changes uniformly to all pages comprising the documentation.
 
 ## Using Redoc
 
