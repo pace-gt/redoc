@@ -22,12 +22,11 @@ which files to access and which commands to run in order to replicate the exampl
 used in the check, making use of the module's features.
 This provides several advantages over creating user documentation for modules by hand:
 
-- **It is easier and faster.** Redoc leverages existing Reframe sanity checks for modules.
-    This makes it fast and easy to both create user documentation and keep it updated.
-- **It is more robust.** Because the usage examples shown in the Redoc-generated documentation are also
-    used in sanity checks, you can be sure that they will work when users try them
-    as long as the sanity checks continue to pass.
-    
+- **It is easier and faster.** Redoc leverages existing Reframe sanity checks to generate instructions,
+    making it fast and easy to create new user documentation and update existing documentation.
+- **The examples are more robust.** Because the usage examples shown in the Redoc-generated documentation are also
+    exactly carried out in Reframe sanity checks, you can be sure that they will work when users try them
+    as long as the checks continue to pass.
 
 ## Using Redoc
 
