@@ -22,13 +22,9 @@ which files to access and which commands to run in order to replicate the exampl
 used in the check and make use of the module's features.
 This provides several advantages over creating user documentation for modules by hand:
 
-- It is easier and faster.
-
-    Redoc leverages existing Reframe sanity checks for modules.
+- **It is easier and faster.** Redoc leverages existing Reframe sanity checks for modules.
     This makes it fast and easy to both create user documentation and keep it updated.
-- It is more robust.
-
-    Because the usage examples shown in the Redoc-generated documentation are also
+- **It is more robust.** Because the usage examples shown in the Redoc-generated documentation are also
     used in sanity checks, you can be sure that they will work when users try them
     as long as the sanity checks continue to pass.
     
@@ -36,9 +32,7 @@ This provides several advantages over creating user documentation for modules by
 ## Using Redoc
 
 This repository contains two scripts of interest:
-- redoc.py
-
-    Generates a markdown file for one software module
+- **redoc.py:** Generates a markdown file for one software module
     using one Reframe sanity check. It takes three arguments:
     the name of the module (-m),
     the path to the output directory of the Reframe sanity check (-o),
@@ -49,9 +43,7 @@ This repository contains two scripts of interest:
     of how Reframe is configured.
     Note that this script should be run from the Redoc directory
     and that it requires the Jinja2 library.
-- redoc_wrapper.sh
-
-    Iterates through Reframe tests and runs redoc.py on those marked with the "redoc" tag.
+- **redoc_wrapper.sh:** Iterates through Reframe tests and runs redoc.py on those marked with the "redoc" tag.
     This script takes no arguments and is fairly small, but is specifically designed to
     work for PACE's Reframe configuration and may not work on other clusters
     that use Reframe differently.
@@ -59,20 +51,12 @@ This repository contains two scripts of interest:
 ## Redoc Features
 
 Each markdown file created by Redoc has the following sections, if relevant:
-- Module description
-
-    The description displayed if a user runs `module help <module>`.
-- Files
-
-    Enumerates the files necessary to run the example,
+- **Module description:** The description displayed if a user runs `module help <module>`.
+- **Files:** Enumerates the files necessary to run the example,
     as well as instructions for how to access them.
     It distinguishes between source code files, Makefiles, and other general input files.
-- Commands to run example
-
-    Commands for loading the relevant module(s), compiling any necessary code,
+- **Commands to run example:** Commands for loading the relevant module(s), compiling any necessary code,
     and running the example. Complete with comments.
-- Attribution
-
-    A link to the source of the example, if provided to the Reframe sanity check
+- **Attribution:** A link to the source of the example, if provided to the Reframe sanity check
     by way of a comment in the post_run field like the following:
     self.post_run = ['# Attribution: <url>']
