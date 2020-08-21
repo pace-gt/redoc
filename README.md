@@ -19,7 +19,7 @@ using its functionality- quite possibly the same example that was used for the R
 Redoc uses existing Reframe sanity checks for software modules to automatically generate user
 documentation. Redoc creates a markdown file from each sanity check telling users
 which files to access and which commands to run in order to replicate the example
-used in the check and make use of the module's features.
+used in the check, making use of the module's features.
 This provides several advantages over creating user documentation for modules by hand:
 
 - **It is easier and faster.** Redoc leverages existing Reframe sanity checks for modules.
