@@ -11,7 +11,7 @@ flake8:
   stage: Static Python Analysis
   script:
   - echo "Testing using flake8."
-  - find ./bin -type f -exec grep -El '^#!(.*/|.*env +)(python)' {} \; | xargs flake8 --max-line-length=120 
+  - find ./ -type f -exec grep -El '^#!(.*/|.*env +)(python)' {} \; | xargs flake8 --max-line-length=120 
   allow_failure: true
   tags: [flake8]
 
