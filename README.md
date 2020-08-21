@@ -57,5 +57,5 @@ Each markdown file created by Redoc has the following sections, if relevant:
 - **Commands to run example:** Commands for loading the relevant module(s), compiling any necessary code,
     and running the example. Complete with comments.
 - **Attribution:** A link to the source of the example, if provided to the Reframe sanity check
-    by way of a comment in the post_run field like the following:
-    self.post_run = ['# Attribution: \<url\>']
+    by way of a comment in the post_run field:
+    `self.post_run = ['# Attribution: <url>']`
