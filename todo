@@ -13,5 +13,6 @@ delete this todo
 check teams todo. add "identify redoc candidates"
 adapt script to use existing reframe/pace/<module>/src folders as repo. redoc.py should get this info from config.txt
 sift through stuff in my home directory- can I delete or move it?
+work summary
 
 long-term improvements: color output? much more aggressive commenting? comprehensive list of compilers and source code file extensions? add license to repo?
