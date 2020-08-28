@@ -1,8 +1,7 @@
 why is redoc_all terminating the loop when it has to run an mpi test???
 move 3 parameters to config.txt
-color output of both scripts?
 make symlinks
-comment redoc_tagged, and go absolutely ham on comments on both scripts? maybe add to teams todo for now
+comment redoc_tagged
 in documentation,
     remove features? maybe put one sentence summary in description
     make exact usage and behavior of two scripts more clear. both should now be portable. describe what arguments are for and how necessary they are. make clear that they are alternate ways of using redoc. also explain how to do EVERYTHING, like how to add attribution
@@ -14,4 +13,5 @@ delete this todo
 check teams todo. add "identify redoc candidates"
 adapt script to use existing reframe/pace/<module>/src folders as repo. redoc.py should get this info from config.txt
 sift through stuff in my home directory- can I delete or move it?
-add license to repo?
+
+long-term improvements: color output? much more aggressive commenting? comprehensive list of compilers and source code file extensions? add license to repo?
