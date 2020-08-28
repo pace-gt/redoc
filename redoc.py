@@ -30,7 +30,7 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-# Make sure input directories are formatted correctly
+# Make sure directory arguments are formatted correctly
 if args.src_dir is not None:
     src_dir = args.src_dir
     if len(src_dir) == 0:
@@ -142,7 +142,7 @@ else:
     input_files = []
 
 # Determine template variable 'repository'
-repository = 'some/repository'
+repository = 'some/directory'
 
 # Determine template variables 'run_commands' and 'attribution'
 
@@ -249,7 +249,7 @@ def include_src_file(src_file):
     return ''.join(ret_lines)
 
 
-# Define function for use in template. Returns directory conotents.
+# Define function for use in template. Returns directory contents.
 def include_input_dir(input_dir):
     item_limit = 25
     dir_path = '{}/{}'.format(src_dir, input_dir)
@@ -285,7 +285,7 @@ populated = template.render(
     run_commands=run_commands,
     attribution=attribution
 )
-output_dir_name = 'populated_examples'
+output_dir_name = 'docs'
 if not os.path.exists(output_dir_name):
     os.makedirs(output_dir_name)
 output_file_name = '{}/{}.md'.format(output_dir_name, module)
@@ -293,3 +293,4 @@ if os.path.exists(output_file_name):
     os.remove(output_file_name)
 writer = open(output_file_name, 'w')
 writer.write(populated)
+print(' Doc generated!')
