@@ -51,7 +51,7 @@ functionality is available.
 ### Download
 
 To download Redoc, run
-`git clone git@gitlab.pace.gatech.edu:pace-apps/redoc.git`
+`git clone git@gitlab.pace.gatech.edu:pace-apps/redoc.git`. 
 No install is necessary.
 
 ### Dependencies
