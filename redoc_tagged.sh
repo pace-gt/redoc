@@ -15,12 +15,28 @@ fi
 # Read info from redoc config file
 if [ -f "$config_file" ]
 then
-    reframe_config_file="$(jq -r ".reframe_config_file" config.json)"
-    reframe_prefix="$(jq -r ".reframe_prefix" config.json)"
-    reframe_test_directory="$(jq -r ".reframe_test_directory" config.json)"
+    reframe_config_file="$(jq -j ".reframe_config_file" config.json)"
+    reframe_prefix="$(jq -j ".reframe_prefix" config.json)"
+    reframe_test_directory="$(jq -j ".reframe_test_directory" config.json)"
+    lmodrc_lua="$(jq -j ".lmodrc_lua" config.json)"
+    lmod_spider="$(jq -j ".lmod_spider" config.json)"
 else
     echo "Error: Please set up $config_file."
     exit 1
+fi
+
+# Set lmod-related flags to pass to redoc.py
+if [ "$lmodrc_lua" == "null" ]
+then
+    lmodrc_lua_flag=""
+else
+    lmodrc_lua_flag="-l $lmodrc_lua"
+fi
+if [ "$lmod_spider" == "null" ]
+then
+    lmod_spider_flag=""
+else
+    lmod_spider_flag="-p $lmod_spider"
 fi
 
 # Ensure that specified reframe config file exists
@@ -108,7 +124,7 @@ do
     fi
 
     # Call redoc script on reframe test
-    python redoc.py -m "$module" $src_dir_flag -o "$output_dir"
+    python redoc.py -m "$module" $src_dir_flag $lmodrc_lua_flag $lmod_spider_flag -o "$output_dir"
 
 done <<< "$lines"
 

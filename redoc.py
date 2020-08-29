@@ -19,12 +19,22 @@ parser.add_argument(
 parser.add_argument(
     '-o', '--output_dir',  # Change? (misleading)
     type=str, required=True,
-    help=('The output directory of the reframe test to be used')
+    help='The output directory of the reframe test to be used'
 )
 parser.add_argument(
     '-s', '--src_dir',
     type=str,
-    help=('The source directory of the reframe test to be used')
+    help='The source directory of the reframe test to be used'
+)
+parser.add_argument(
+    '-l', '--lmodrc_lua',
+    type=str,
+    help='The path to lmodrc.lua'
+)
+parser.add_argument(
+    '-p', '--lmod_spider',
+    type=str,
+    help='The path to lmod spider'
 )
 args = parser.parse_args()
 
@@ -48,21 +58,20 @@ module = args.module
 
 # Determine template variable 'module_help'
 module_help = ''
-module_data_json = subprocess.check_output(
-    ('LMOD_RC=/usr/local/pace-apps/lmod'
-     '/site/lmodrc.lua'
-     ' /usr/local/pace-apps/lmod/lmod'
-     '/libexec/spider -o jsonSoftwarePage'
-     ' "$MODULEPATH"'), shell=True
-)
-module_data = json.loads(module_data_json)
-for package in module_data:
-    if package['package'] == module:
-        if 'help' in package['versions'][0]:
-            module_help = package['versions'][0]['help']
-            break
-if re.match(r'^\s*module load.*', module_help):  # Prevents useless help text
-    module_help = None
+if (args.lmodrc_lua is not None) and (args.lmod_spider is not None):
+    module_data_json = subprocess.check_output(
+        ('LMOD_RC={}'.format(args.lmodrc_lua)
+         + ' {} -o jsonSoftwarePage'.format(args.lmod_spider)
+         + ' "$MODULEPATH"'), shell=True
+    )
+    module_data = json.loads(module_data_json)
+    for package in module_data:
+        if package['package'] == module:
+            if 'help' in package['versions'][0]:
+                module_help = package['versions'][0]['help']
+                break
+    if re.match(r'^\s*module load.*', module_help):  # Prevents useless text
+        module_help = ''
 
 # Determine template variable 'makefile'
 

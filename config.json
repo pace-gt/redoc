@@ -1,5 +1,7 @@
 {
     "reframe_config_file": "/usr/local/pace-apps/manual/packages/reframe/pace/config/settings.py",
     "reframe_prefix": "/storage/home/hcodaman1/yandeweg3/scratch/reframe",
-    "reframe_test_directory": "/storage/home/hcodaman1/yandeweg3/reframe/pace"
+    "reframe_test_directory": "/storage/home/hcodaman1/yandeweg3/reframe/pace",
+    "lmodrc_lua": "/usr/local/pace-apps/lmod/site/lmodrc.lua",
+    "lmod_spider": "/usr/local/pace-apps/lmod/lmod/libexec/spider"
 }
