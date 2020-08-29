@@ -81,7 +81,7 @@ do
     # Check if documentation already exists
     if [ -f "$docs/${module}.md" ]
     then
-        echo " Error: '$docs/${module}.md' already exists! To generate a new version, delete it and rerun redoc_tagged."
+        echo " Warning: Did not generate doc- '$docs/${module}.md' already exists."
         continue
     fi
 
@@ -90,7 +90,7 @@ do
     then
         if ! [ "$(grep -c 'self.sourcesdir = None' "$pyfile")" -eq "$(grep -c 'self.sourcesdir =' "$pyfile")" ]
         then
-            echo " Error: Non-standard src directory."
+            echo " Warning: Did not generate doc- Non-standard src directory."
             continue
         fi
     fi
@@ -119,7 +119,7 @@ do
     # Ensure that output directory exists
     if [ ! -d "$output_dir" ]
     then
-        echo " Error: Output directory still not found."
+        echo " Warning: Did not generate doc- Output directory still not found."
         continue
     fi
 
