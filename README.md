@@ -75,7 +75,7 @@ No install is necessary.
    a directory called <module>. If any of the tests for this module require
    any files, these must be placed in a directory called 'src', which
    must also be placed in the <module> directory. Tests that do not require
-   any files should include the `line self.sourcesdir = None`.
+   any files should include the line `self.sourcesdir = None`.
    Finally, all of the directories named <module> for various modules must be
    in the same parent directory, which will be referred to as the reframe test directory.
 2. **Set up the Redoc config file.** In order to run redoc_tagged.sh,
@@ -88,12 +88,15 @@ No install is necessary.
    4. lmod_path: The path to lmod.
    5. lmodrc_path: The path to lmodrc.lua.
 
+
 3. **Tag Reframe tests with 'redoc'.** Each test with the 'redoc' tag will be used
    to generate documentation whenever redoc_tagged.sh is run. Ideal candidates are regression
    tests that use some of the basic features of a module without needing a long time to run.
 4. **Supply attribution where desired.** To attribute an exercise used in a test to a
    particular website, insert the url in the test's post_run field:
+
    `self.post_run = ['Attribution: <url>']`
+   
    (If the test already has a post_run field, simply add the above string to the array.)
 
 ## Using Redoc
