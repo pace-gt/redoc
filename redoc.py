@@ -19,14 +19,12 @@ parser.add_argument(
 parser.add_argument(
     '-o', '--output_dir',  # Change? (misleading)
     type=str, required=True,
-    help=('The output directory for the reframe test '
-          'from which to generate documentation')
+    help=('The output directory of the reframe test to be used')
 )
 parser.add_argument(
     '-s', '--src_dir',
     type=str,
-    help=('The source directory for the reframe test '
-          'from which to generate documentation')
+    help=('The source directory of the reframe test to be used')
 )
 args = parser.parse_args()
 

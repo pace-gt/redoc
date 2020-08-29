@@ -1,18 +1,16 @@
-why is redoc_all terminating the loop when it has to run an mpi RT???
+why is redoc_all terminating the loop when it has to run an mpi RT??? fix
+how did Kevin specify src as default source location? add to readme
+add support for alternative lmod install locations or lack thereof
 in documentation,
-    remove features? maybe put one sentence summary in description
-    make exact usage and behavior of two scripts more clear. both should now be portable. describe what arguments are for and how necessary they are. make clear that they are alternate ways of using redoc. also explain how to do EVERYTHING, like how to add attribution
-    describe every single file in the repo
-    describe how users' reframe tests should be organized, with source folders MUST be public. (source folders CAN be different than src but those docs will not work with redoc_tagged)
-    clarify that if redoc_tagged fails on a particular RT you can make that one by hand with redoc.py
-    replace "example" with "example exercise" where relevant. in gitlab project description too- wont let me edit :/
+    replace "example" with "example exercise" where relevant.
     dependencies: in addition to reframe, redoc requires jinja and jq
     set up config in json format with absolute paths, or redoc_tagged will not work
 delete this todo
+replace gitlab project description with top tagline from readme. it wont let me :/
 check teams todo. add "identify redoc candidates" and some of the long term stuff below
 adapt script to use existing reframe/pace/<module>/src folders as repo. redoc.py should get this info from config.txt
 sift through stuff in my home directory- can I delete or move it?
 work summary
 check email
 
-long-term improvements: color output? symlinks? much more aggressive commenting? comprehensive list of compilers and source code file extensions? add license to repo?
+long-term improvements: color output? symlinks? much more aggressive commenting? comprehensive list of compilers and source code file extensions? add license to repo? make sure reframe and redoc are consistently capitalized in readme.
