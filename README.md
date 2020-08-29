@@ -81,6 +81,7 @@ No install is necessary.
       in the same parent directory, which will be referred to as the reframe test directory.
       Users should have read permissions to this directory so that they can access the
       files necessary for the example exercises.
+
 2. **Set up the Redoc config file.** In order to run redoc_tagged.sh,
    you must set up the Redoc config file, named config.json.
    In particular, it needs to be given five pieces of information:
@@ -88,14 +89,17 @@ No install is necessary.
     2. reframe_prefix: The path to your Reframe stage and output directories.
     3. reframe_test_directory: The path to your reframe tests, structured
        as perscribed above.
-    4. lmod_path: The path to lmod.
-   5. lmodrc_path: The path to lmodrc.lua.
+    4. lmodrc_lua: The path to lmodrc.lua (omit if lmod is not used)
+    5. lmod_spider: The path to the lmod spider executable (omit if lmod is not used)
    
    These paths should be absolute.
+
 3. **Tag Reframe tests with 'redoc'.** Each test with the 'redoc' tag will be used
    to generate documentation whenever redoc_tagged.sh is run. Ideal candidates are regression
    tests that use some of the basic features of a module without needing a long time to run.
-4. **Supply attribution where desired.** To attribute an exercise used in a test to a
+4. **Customize templates/template.md.** Feel free to make changes to the doc template's
+   text to fit your cluster.
+5. **Supply attribution where desired.** To attribute an exercise used in a test to a
    particular website, insert the url in the test's post_run field as a comment: 
    `self.post_run = ['# Attribution: <url>']` 
    (If the test already has a post_run field, simply add the above string to the array.)
@@ -116,17 +120,19 @@ as perscribed in setup step 1 above.
 - config.json: Redoc config file. In order to run redoc_tagged.sh,
   it must be populated with some basic information about reframe and lmod on your system.
 - redoc.py: Generates a doc for a software module from a reframe regression test.
+  The Reframe test must have been run before.
   Typically, this script is not run directly; rather, it is called by redoc_tagged.sh.
   However, it is possible (and in some cases necessary) to directly run redoc.py
   to generate a particular piece of documentation. It takes 5 keyword arguments:
   1. -m (required): The name of the module for which to generate documentation.
   2. -o (required): The path to the output directory of the reframe test to be used.
   3. -s (optional): The path to the source directory of the reframe test to be used. Should only be omitted if exercise does not require any files.
-  4. -l (optional): The path to lmod.
-  5. -u (optional): The path to lmodrc.lua.
+  4. -l (optional): The path to lmodrc.lua.
+  5. -p (optional): The path to lmod spider.
   
   The documentation is saved to a directory called 'docs', which is created if it does
   not already exist.
 - redoc_tagged.sh: Calls redoc.py on every Reframe test with the 'redoc' tag, automatically
   supplying the arguments. This is the most efficient way to generate large amounts
-  of documentation.
+  of documentation. It takes no arguments, drawing the information it needs from
+  config.json, and automatically runs any Reframe tests that have not been run before.
