@@ -97,7 +97,9 @@ No install is necessary.
 3. **Tag Reframe tests with 'redoc'.** Each test with the 'redoc' tag will be used
    to generate documentation whenever redoc_tagged.sh is run. Ideal candidates are regression
    tests that use some of the basic features of a module without needing a long time to run.
-4. **Supply attribution where desired.** To attribute an exercise used in a test to a
+4. **Customize templates/template.md.** Feel free to make changes to the doc template's
+   text to fit your cluster.
+5. **Supply attribution where desired.** To attribute an exercise used in a test to a
    particular website, insert the url in the test's post_run field as a comment: 
    `self.post_run = ['# Attribution: <url>']` 
    (If the test already has a post_run field, simply add the above string to the array.)
