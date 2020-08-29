@@ -63,6 +63,8 @@ for package in data:
         if 'help' in package['versions'][0]:
             module_help = package['versions'][0]['help']
             break
+if re.match(r'^\s*module load.*', module_help):  # Prevents useless help text
+    module_help = None
 
 # Determine template variable 'makefile'
 
@@ -142,7 +144,7 @@ else:
     input_files = []
 
 # Determine template variable 'repository'
-repository = 'some/directory'
+repository = args.src_dir
 
 # Determine template variables 'run_commands' and 'attribution'
 
@@ -285,12 +287,12 @@ populated = template.render(
     run_commands=run_commands,
     attribution=attribution
 )
-output_dir_name = 'docs'
-if not os.path.exists(output_dir_name):
-    os.makedirs(output_dir_name)
-output_file_name = '{}/{}.md'.format(output_dir_name, module)
-if os.path.exists(output_file_name):
-    os.remove(output_file_name)
-writer = open(output_file_name, 'w')
+docs_dir = 'docs'
+if not os.path.exists(docs_dir):
+    os.makedirs(docs_dir)
+doc_name = '{}/{}.md'.format(docs_dir, module)
+if os.path.exists(doc_name):
+    os.remove(doc_name)
+writer = open(doc_name, 'w')
 writer.write(populated)
 print(' Doc generated!')
