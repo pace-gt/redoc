@@ -90,6 +90,7 @@ No install is necessary.
        as perscribed above.
     4. lmod_path: The path to lmod.
    5. lmodrc_path: The path to lmodrc.lua.
+   
    These paths should be absolute.
 3. **Tag Reframe tests with 'redoc'.** Each test with the 'redoc' tag will be used
    to generate documentation whenever redoc_tagged.sh is run. Ideal candidates are regression
@@ -123,6 +124,7 @@ as perscribed in setup step 1 above.
   3. -s (optional): The path to the source directory of the reframe test to be used. Should only be omitted if exercise does not require any files.
   4. -l (optional): The path to lmod.
   5. -u (optional): The path to lmodrc.lua.
+  
   The documentation is saved to a directory called 'docs', which is created if it does
   not already exist.
 - redoc_tagged.sh: Calls redoc.py on every Reframe test with the 'redoc' tag, automatically
