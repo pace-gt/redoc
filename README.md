@@ -70,15 +70,17 @@ No install is necessary.
 
 1. **Set up your Reframe regression tests.** In order for redoc to do anything,
    you must have Reframe regression tests. In order to run redoc_tagged.sh,
-   these tests must be structured in a particular way, described here.
-   The tests for each module must be defined in a script named <module>.py,
-   where <module> is the name of the module tested. This script must be placed in
-   a directory called <module>. If any of the tests for this module require
-   any files, these must be placed in a directory called 'src', which
-   must also be placed in the <module> directory. Tests that do not require
-   any files should include the line `self.sourcesdir = None`.
-   Finally, all of the directories named <module> for various modules must be
-   in the same parent directory, which will be referred to as the reframe test directory.
+   these tests must be structured in a particular way:
+    - The tests for each module must be defined in a script named <module>.py,
+      where <module> is the name of the module tested. This script must be placed in
+      a directory called <module>. If any of the tests for this module require
+      any files, these must be placed in a directory called 'src', which
+      must also be placed in the <module> directory. Tests that do not require
+      any files should include the line `self.sourcesdir = None`.
+      Finally, all of the directories named <module> for various modules must be
+      in the same parent directory, which will be referred to as the reframe test directory.
+      Users should have read permissions to this directory so that they can access the
+      files necessary for the example exercises.
 2. **Set up the Redoc config file.** In order to run redoc_tagged.sh,
    you must set up the Redoc config file, named config.json.
    In particular, it needs to be given five pieces of information:
