@@ -93,10 +93,8 @@ No install is necessary.
    to generate documentation whenever redoc_tagged.sh is run. Ideal candidates are regression
    tests that use some of the basic features of a module without needing a long time to run.
 4. **Supply attribution where desired.** To attribute an exercise used in a test to a
-   particular website, insert the url in the test's post_run field:
-
-   `self.post_run = ['Attribution: <url>']`
-   
+   particular website, insert the url in the test's post_run field: 
+   `self.post_run = ['Attribution: <url>']` 
    (If the test already has a post_run field, simply add the above string to the array.)
 
 ## Using Redoc
