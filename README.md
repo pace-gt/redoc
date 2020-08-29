@@ -81,6 +81,7 @@ No install is necessary.
       in the same parent directory, which will be referred to as the reframe test directory.
       Users should have read permissions to this directory so that they can access the
       files necessary for the example exercises.
+
 2. **Set up the Redoc config file.** In order to run redoc_tagged.sh,
    you must set up the Redoc config file, named config.json.
    In particular, it needs to be given five pieces of information:
@@ -89,9 +90,10 @@ No install is necessary.
     3. reframe_test_directory: The path to your reframe tests, structured
        as perscribed above.
     4. lmod_path: The path to lmod.
-   5. lmodrc_path: The path to lmodrc.lua.
+    5. lmodrc_path: The path to lmodrc.lua.
    
    These paths should be absolute.
+
 3. **Tag Reframe tests with 'redoc'.** Each test with the 'redoc' tag will be used
    to generate documentation whenever redoc_tagged.sh is run. Ideal candidates are regression
    tests that use some of the basic features of a module without needing a long time to run.
@@ -116,6 +118,7 @@ as perscribed in setup step 1 above.
 - config.json: Redoc config file. In order to run redoc_tagged.sh,
   it must be populated with some basic information about reframe and lmod on your system.
 - redoc.py: Generates a doc for a software module from a reframe regression test.
+  The Reframe test must have been run before.
   Typically, this script is not run directly; rather, it is called by redoc_tagged.sh.
   However, it is possible (and in some cases necessary) to directly run redoc.py
   to generate a particular piece of documentation. It takes 5 keyword arguments:
@@ -129,4 +132,5 @@ as perscribed in setup step 1 above.
   not already exist.
 - redoc_tagged.sh: Calls redoc.py on every Reframe test with the 'redoc' tag, automatically
   supplying the arguments. This is the most efficient way to generate large amounts
-  of documentation.
+  of documentation. It takes no arguments, drawing the information it needs from
+  config.json, and automatically runs any Reframe tests that have not been run before.
