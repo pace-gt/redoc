@@ -50,15 +50,15 @@ module = args.module
 
 # Determine template variable 'module_help'
 module_help = ''
-data_json = subprocess.check_output(
+module_data_json = subprocess.check_output(
     ('LMOD_RC=/usr/local/pace-apps/lmod'
      '/site/lmodrc.lua'
      ' /usr/local/pace-apps/lmod/lmod'
      '/libexec/spider -o jsonSoftwarePage'
      ' "$MODULEPATH"'), shell=True
 )
-data = json.loads(data_json)
-for package in data:
+module_data = json.loads(module_data_json)
+for package in module_data:
     if package['package'] == module:
         if 'help' in package['versions'][0]:
             module_help = package['versions'][0]['help']
