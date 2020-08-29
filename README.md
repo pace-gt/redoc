@@ -90,6 +90,7 @@ No install is necessary.
        as perscribed above.
     4. lmod_path: The path to lmod.
    5. lmodrc_path: The path to lmodrc.lua.
+   These paths should be absolute.
 3. **Tag Reframe tests with 'redoc'.** Each test with the 'redoc' tag will be used
    to generate documentation whenever redoc_tagged.sh is run. Ideal candidates are regression
    tests that use some of the basic features of a module without needing a long time to run.
