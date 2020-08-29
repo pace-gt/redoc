@@ -128,4 +128,3 @@ as perscribed in setup step 1 above.
 - redoc_tagged.sh: Calls redoc.py on every Reframe test with the 'redoc' tag, automatically
   supplying the arguments. This is the most efficient way to generate large amounts
   of documentation.
-
