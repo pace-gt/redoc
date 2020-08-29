@@ -125,7 +125,7 @@ as perscribed in setup step 1 above.
   1. -m (required): The name of the module for which to generate documentation.
   2. -o (required): The path to the output directory of the reframe test to be used.
   3. -s (optional): The path to the source directory of the reframe test to be used. Should only be omitted if exercise does not require any files.
-  4. -l (optional): The path to lmod.
+  4. -l (optional): The path to your lmod install.
   5. -u (optional): The path to lmodrc.lua.
   
   The documentation is saved to a directory called 'docs', which is created if it does
