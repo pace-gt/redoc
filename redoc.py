@@ -79,7 +79,7 @@ else:
 # 'input_files', and 'input_directories'
 
 
-# Determine whether files in src are relevant to this example
+# Determine whether files in src are relevant to this exercise
 def find_relevant(src_files, text, relevant_src_files):
     for src_file in src_files:
         if '.' in src_file:
@@ -212,11 +212,11 @@ for line in run_command_lines:
             attribution = patt.match(line).group(1)
         else:
             if not run_comment:
-                new_run_command_lines.append('\n# Run example')
+                new_run_command_lines.append('\n# Run exercise')
                 run_comment = True
             new_run_command_lines.append(line)
-while new_run_command_lines.count('\n# Run example') > 1:
-    new_run_command_lines.remove('\n# Run example')
+while new_run_command_lines.count('\n# Run exercise') > 1:
+    new_run_command_lines.remove('\n# Run exercise')
 run_commands = os.linesep.join(new_run_command_lines)
 
 # Configure jinja
