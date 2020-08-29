@@ -59,6 +59,7 @@ No install is necessary.
 **Required:**
 - [Reframe regression testing framework](https://reframe-hpc.readthedocs.io/en/stable/)
 - [Jinja2 templating package for Python](https://jinja.palletsprojects.com/en/2.11.x/)
+
 **Recommended:**
 - [jq command line JSON processor](https://stedolan.github.io/jq/) (Required
   to run redoc_tagged.sh)
@@ -81,14 +82,12 @@ No install is necessary.
 2. **Set up the Redoc config file.** In order to run redoc_tagged.sh,
    you must set up the Redoc config file, named config.json.
    In particular, it needs to be given five pieces of information:
-   1. reframe_config_file: The path to your Reframe config file.
-   2. reframe_prefix: The path to your Reframe stage and output directories.
-   3. reframe_test_directory: The path to your reframe tests, structured
-      as perscribed above.
-   4. lmod_path: The path to lmod.
+    1. reframe_config_file: The path to your Reframe config file.
+    2. reframe_prefix: The path to your Reframe stage and output directories.
+    3. reframe_test_directory: The path to your reframe tests, structured
+       as perscribed above.
+    4. lmod_path: The path to lmod.
    5. lmodrc_path: The path to lmodrc.lua.
-
-
 3. **Tag Reframe tests with 'redoc'.** Each test with the 'redoc' tag will be used
    to generate documentation whenever redoc_tagged.sh is run. Ideal candidates are regression
    tests that use some of the basic features of a module without needing a long time to run.
