@@ -22,7 +22,7 @@ This example uses the following source code files.
 
 {% if makefile %}
 ## Makefile
-This example uses a Makefile. You can copy it to your current working directory by running `cp {{ repository }}/Makefile .`.
+This example uses a Makefile. You can copy it to your current working directory by running `cp {{ repository }}/{{ makefile }} .`.
 Makefile text:
 
     {{ include_src_file(makefile)|indent }}

@@ -77,8 +77,11 @@ if (args.lmodrc_lua is not None) and (args.lmod_spider is not None):
 
 if args.src_dir is not None:
     makefile_path = '{}/Makefile'.format(src_dir)
+    makefile_path2 = '{}/makefile'.format(src_dir)
     if os.path.exists(makefile_path):
         makefile = 'Makefile'
+    elif os.path.exists(makefile_path2):
+        makefile = 'makefile'
     else:
         makefile = ''
 else:
