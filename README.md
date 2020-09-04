@@ -1,6 +1,6 @@
 # Redoc
 
-### A tool for automatically generating user documentation for HPC software modules from Reframe sanity checks.
+**A tool for automatically generating user documentation for HPC software modules from Reframe sanity checks.**
 
 ## What is Redoc?
 
