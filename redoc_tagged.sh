@@ -69,14 +69,14 @@ then
 fi
 
 # Main loop
-while IFS= read -r line
+echo "$lines" | while read line ;
 do
 
     # Determine basic information about reframe test
-    module="$(echo "$line" | cut -d '/' -f 8)"
-    rt="$(echo "$line" | cut -d ' ' -f 4)"
+    module="$(echo "$line" | rev | cut -d '/' -f 2 | rev)"
+    rt="$(echo "$line" | cut -d ' ' -f 2)"
     echo -n "    $module ($rt):"
-    pyfile="$(echo "$line" | cut -d ' ' -f 7 | cut -d ')' -f 1)"
+    pyfile="$(echo "$line" | cut -d ' ' -f 5 | cut -d ')' -f 1)"
 
     # Check if documentation already exists
     if [ -f "$docs/${module}.md" ]
@@ -126,7 +126,7 @@ do
     # Call redoc script on reframe test
     python redoc.py -m "$module" $src_dir_flag $lmodrc_lua_flag $lmod_spider_flag -o "$output_dir"
 
-done <<< "$lines"
+done
 
 # Announce end of loop
 echo Done.
