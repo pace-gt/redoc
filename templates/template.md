@@ -13,7 +13,8 @@ You can show a simple description of {{ module }} by running `module help {{ mod
 This example uses the following source code files.
 {% for source_file in source_files %}
 1. **{{ source_file }}**
-    You can copy this source file to your current working directory by running `cp {{ repository }}/{{ source_file }} .`.
+    You can copy this source file to your current working directory by running
+    `cp {{ repository.replace('/storage/home/hcodaman1/yandeweg3', '/usr/local/pace-apps/manual/packages') }}/{{ source_file }} .`.
     File text:
 
         {{ include_src_file(source_file)|indent|indent }}
@@ -22,7 +23,8 @@ This example uses the following source code files.
 
 {% if makefile %}
 ## Makefile
-This example uses a Makefile. You can copy it to your current working directory by running `cp {{ repository }}/{{ makefile }} .`.
+This example uses a Makefile. You can copy it to your current working directory by running
+`cp {{ repository.replace('/storage/home/hcodaman1/yandeweg3', '/usr/local/pace-apps/manual/packages') }}/{{ makefile }} .`.
 Makefile text:
 
     {{ include_src_file(makefile)|indent }}
@@ -33,7 +35,8 @@ Makefile text:
 This example uses the following input files.
 {% for input_file in input_files %}
 1. **{{ input_file }}**
-    You can copy this input file to your current working directory by running `cp {{ repository }}/{{ input_file }} .`.
+    You can copy this input file to your current working directory by running
+    `cp {{ repository.replace('/storage/home/hcodaman1/yandeweg3', '/usr/local/pace-apps/manual/packages') }}/{{ input_file }} .`.
     File text:
 
         {{ include_src_file(input_file)|indent|indent }}
@@ -45,7 +48,8 @@ This example uses the following input files.
 This example uses the following input directories.
 {% for input_directory in input_directories %}
 1. **{{ input_directory }}**
-    You can copy this input directory to your current working directory by running `cp -r {{ repository }}/{{ input_directory }} .`.
+    You can copy this input directory to your current working directory by running
+    `cp {{ repository.replace('/storage/home/hcodaman1/yandeweg3', '/usr/local/pace-apps/manual/packages') }}/{{ source_directory }} .`.
     Contents:
 
     {{ include_input_dir(input_directory)|indent }}
