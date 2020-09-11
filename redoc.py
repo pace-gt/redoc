@@ -103,8 +103,11 @@ def find_relevant(src_files, text, relevant_src_files):
             file_path = '{}/{}'.format(src_dir, src_file)
             if os.path.isfile(file_path):
                 reader = open(file_path, 'r')
-                new_text = reader.read()
-                find_relevant(src_files, new_text, relevant_src_files)
+                try:
+                    new_text = reader.read()
+                    find_relevant(src_files, new_text, relevant_src_files)
+                except:
+                    pass
 
 
 # Determine whether a file in src is a source file or an input file
