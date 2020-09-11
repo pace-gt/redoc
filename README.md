@@ -60,7 +60,7 @@ Identify the tests you want to use to generate documentation. It is recommended 
 
 If the exercise performed by a test was developed by someone else, consider providing the link to its source by inserting the url in the test's post_run field as a comment: 
 
-`self.post_run = ['# Attribution: <url>']` (If the test already has a post_run field, simply add the attribution string to the list.)
+`self.post_run = ['# Attribution: put.url/here']` (If the test already has a post_run field, simply add the attribution string to the list.)
 
 This type of comment will be handled by Redoc.
 
