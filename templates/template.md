@@ -63,7 +63,7 @@ Run the following commands. Remember that in order to execute this example on co
 
 {% if attribution %}
 ## Attribution
-This example comes from {{ attribution }}.
+This example comes from [{{ attribution }}]({{ attribution }}).
 {% endif %}
 
 ---
