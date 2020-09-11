@@ -57,13 +57,13 @@ This example uses the following input directories.
 {% endif %}
 
 ## Running the exercise
-Run the following commands. Remember that in order to execute this example on compute nodes, you should submit these commands in a PBS script or queue into an interactive session (see Job Submission Overview).
+Run the following commands. Remember that in order to execute this example on compute nodes, you should submit these commands in a PBS script or queue into an interactive session (see [Job Submission](https://pace.gatech.edu/job-submission-0).)
 
     {{ run_commands|indent }}
 
 {% if attribution %}
 ## Attribution
-This example comes from [{{ attribution }}]({{ attribution }}).
+This exercise comes from [{{ attribution }}]({{ attribution }}).
 {% endif %}
 
 ---
