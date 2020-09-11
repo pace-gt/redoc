@@ -190,13 +190,26 @@ compile_comment = False
 remove_comment = False
 run_comment = False
 cat_comment = False
+empty_space_patt = re.compile('^ ')
+empty_spaces_patt = re.compile('^  ')
+module_load_patt = re.compile('^module load \\S+$')
+rm_patt = re.compile('^rm')
+cat_patt = re.compile('^cat')
+mpirun_patt = re.compile('mpirun[^;\n]*[ml][ls];?$')
+mpirun_inline_patt = re.compile('mpirun[^;\n]*[ml][ls];.+$')
+attribution_patt = re.compile(r'^\s*#+\s*[Aa]ttribution: ')
+attribution_capture_patt = re.compile(r'^\s*#+\s*[Aa]ttribution: ([\S\s]*)$')
 attribution = ''
 new_run_command_lines = []
 for line in run_command_lines:
     if line.strip():
-        if re.match('^ ', line) and not re.match('^  ', line):
+        if empty_space_patt.match(line) and not empty_spaces_patt.match(line):
             line = line[1:]
-        if re.match('^module load \\S+$', line):
+        if mpirun_inline_patt.match(line):
+            line = line[line.find(';')+1:]
+        if mpirun_patt.match(line):
+            pass
+        elif module_load_patt.match(line):
             if line not in module_load_lines:
                 if not module_load_lines:
                     new_run_command_lines.append(
@@ -209,19 +222,18 @@ for line in run_command_lines:
                 new_run_command_lines.append('\n# Compile source code')
                 compile_comment = True
             new_run_command_lines.append(line)
-        elif re.match('^rm', line):
+        elif rm_patt.match(line):
             if not remove_comment:
                 new_run_command_lines.append('\n# Remove files created')
                 remove_comment = True
             new_run_command_lines.append(line)
-        elif re.match('^cat', line):
+        elif cat_patt.match(line):
             if not cat_comment:
                 new_run_command_lines.append('\n# Display results')
                 cat_comment = True
             new_run_command_lines.append(line)
-        elif re.match(r'^\s*#+\s*[Aa]ttribution: ', line):
-            patt = re.compile(r'^\s*#+\s*[Aa]ttribution: ([\S\s]*)$')
-            attribution = patt.match(line).group(1)
+        elif attribution_patt.match(line):
+            attribution = attribution_capture_patt.match(line).group(1)
         else:
             if not run_comment:
                 new_run_command_lines.append('\n# Run exercise')
