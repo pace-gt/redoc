@@ -76,11 +76,11 @@ if (args.lmodrc_lua is not None) and (args.lmod_spider is not None):
 # Determine template variable 'makefile'
 
 if args.src_dir is not None:
-    makefile_path = '{}/Makefile'.format(src_dir)
-    makefile_path2 = '{}/makefile'.format(src_dir)
-    if os.path.exists(makefile_path):
+    makefile_path_upper = '{}/Makefile'.format(src_dir)
+    makefile_path_lower = '{}/makefile'.format(src_dir)
+    if os.path.exists(makefile_path_upper):
         makefile = 'Makefile'
-    elif os.path.exists(makefile_path2):
+    elif os.path.exists(makefile_path_lower):
         makefile = 'makefile'
     else:
         makefile = ''
@@ -107,7 +107,12 @@ def find_relevant(src_files, text, relevant_src_files):
                     new_text = reader.read()
                     find_relevant(src_files, new_text, relevant_src_files)
                 except:
-                    pass
+                    try:
+                        binary_reader = open(file_path, 'rb')
+                        binary_reader.read()
+                    except:
+                        raise Exception("Unable to read file '{}'."
+                                        .format(src_file))
 
 
 # Determine whether a file in src is a source file or an input file
@@ -262,18 +267,27 @@ def include_src_file(src_file):
     ret_lines = []
     line_num = 0
     limit_reached = False
-    for line in reader:
-        if line_num < line_limit:
-            if len(line) <= max_line_length:
-                ret_lines.append(line)
+    try:
+        for line in reader:
+            if line_num < line_limit:
+                if len(line) <= max_line_length:
+                    ret_lines.append(line)
+                else:
+                    ret_lines.append(line[:max_line_length - 3] + '...')
             else:
-                ret_lines.append(line[:max_line_length - 3] + '...')
-        else:
-            limit_reached = True
-        line_num += 1
-    if limit_reached:
-        ret_lines.append('.\n.\n.\n')
-    return ''.join(ret_lines)
+                limit_reached = True
+            line_num += 1
+        if limit_reached:
+            ret_lines.append('.\n.\n.\n')
+        return ''.join(ret_lines)
+    except:
+        try:
+            binary_reader = open(file_path, 'rb')
+            binary_reader.read()
+            return ("(Unable to show preview of file"
+                    " '{}' because it is a binary.)".format(src_file))
+        except:
+            raise Exception("Unable to read file '{}'.".format(src_file))
 
 
 # Define function for use in template. Returns directory contents.

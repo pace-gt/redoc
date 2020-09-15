@@ -15,7 +15,7 @@ This example uses the following source code files.
 1. **{{ source_file }}**
     You can copy this source file to your current working directory by running
     `cp {{ repository.replace('/storage/home/hcodaman1/yandeweg3', '/usr/local/pace-apps/manual/packages') }}/{{ source_file }} .`.
-    File text:
+    File preview:
 
         {{ include_src_file(source_file)|indent|indent }}
 {% endfor %}
@@ -25,7 +25,7 @@ This example uses the following source code files.
 ## Makefile
 This example uses a Makefile. You can copy it to your current working directory by running
 `cp {{ repository.replace('/storage/home/hcodaman1/yandeweg3', '/usr/local/pace-apps/manual/packages') }}/{{ makefile }} .`.
-Makefile text:
+Makefile preview:
 
     {{ include_src_file(makefile)|indent }}
 {% endif %}
@@ -37,7 +37,7 @@ This example uses the following input files.
 1. **{{ input_file }}**
     You can copy this input file to your current working directory by running
     `cp {{ repository.replace('/storage/home/hcodaman1/yandeweg3', '/usr/local/pace-apps/manual/packages') }}/{{ input_file }} .`.
-    File text:
+    File preview:
 
         {{ include_src_file(input_file)|indent|indent }}
 {% endfor %}
@@ -49,7 +49,7 @@ This example uses the following input directories.
 {% for input_directory in input_directories %}
 1. **{{ input_directory }}**
     You can copy this input directory to your current working directory by running
-    `cp {{ repository.replace('/storage/home/hcodaman1/yandeweg3', '/usr/local/pace-apps/manual/packages') }}/{{ source_directory }} .`.
+    `cp -r {{ repository.replace('/storage/home/hcodaman1/yandeweg3', '/usr/local/pace-apps/manual/packages') }}/{{ source_directory }} .`.
     Contents:
 
     {{ include_input_dir(input_directory)|indent }}
