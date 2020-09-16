@@ -36,16 +36,16 @@ Redoc generates a markdown file, or doc, for each software module.
 Each doc begins with a description of the module, if it can find one from Lmod.
 Next, the doc lists the files necessary for the exercise, including any
 source code files, makefiles, and general input files.
-It explains how each file can be accessed directly from the reframe sanity check's source directory.
+It explains how each file can be accessed directly from the Reframe sanity check's source directory.
 The third section of each doc shows the commands necessary to run the exercise,
 with automatically inserted comments explaining common actions.
 Finally, the doc provides attribution for the exercise, if provided in the implementation
-of the reframe sanity test.
+of the Reframe sanity test.
 
 ## How to use Redoc
 
 **1. Set up your Reframe tests.**
-For Redoc to use your Reframe tests, they must be structured a certain way. The tests for each module must be defined in a script named \<module\>.py, where \<module\> is the name of the module tested. This script must be placed in a directory called \<module\>. If any of the tests for this module require any files, these must be placed in a directory called 'src', which must also be placed in the \<module\> directory. Tests that do not require any files should include the line `self.sourcesdir = None`. Finally, all of the directories named \<module\> for various modules must be in the same parent directory, which will be referred to as the reframe test directory. Users should have read permissions to this directory so that they can access the files necessary for the example exercises. Here is a tree diagram for fictional modules "foo" and "bar":
+For Redoc to use your Reframe tests, they must be structured a certain way. The tests for each module must be defined in a script named \<module\>.py, where \<module\> is the name of the module tested. This script must be placed in a directory called \<module\>. If a test for this module requires any files (e.g. source code), these must be placed in a directory called 'src', which must also be placed in the \<module\> directory. Finally, all of the directories named \<module\> for various modules must be in the same parent directory, which will be referred to as the Reframe test directory. Users should have read permissions to this directory so that they can access the files necessary for the example exercises. Here is a tree diagram for fictional modules "foo" and "bar":
 
 	reframe_test_directory/
 	├── bar
@@ -79,9 +79,9 @@ No compilation is necessary.
 
 **4. Customize the Redoc config file.**
 For Redoc to work, it needs to know some basic information about Reframe on your system. Please enter the following fields in config.json:
-1. reframe_config_file: The path to your Reframe config file.
-2. reframe_prefix: The path to your Reframe stage and output directories.
-3. reframe_test_directory: The path to your reframe tests, structured as prescribed in step 1 above.
+1. Reframe_config_file: The path to your Reframe config file.
+2. Reframe_prefix: The path to your Reframe stage and output directories.
+3. Reframe_test_directory: The path to your Reframe tests, structured as prescribed in step 1 above.
 
 If you use the [Lmod environment module system](https://lmod.readthedocs.io/en/latest/) to manage your modules, please enter the following additional information:
 
@@ -110,11 +110,11 @@ Congratulations! You now have documentation for your modules.
 - templates: Contains the markdown template that is populated during the generation of documentation.
 - .gitignore: Instructs git not to store the individual docs generated.
 - README.md: This file.
-- config.json: Redoc config file. In order to run redoc_tagged.sh, it must be populated with some basic information about reframe and lmod on your system.
-- redoc.py: Generates a doc for a software module from a reframe regression test. The Reframe test must have been run before. Typically, this script is not run directly; rather, it is called by redoc_tagged.sh. However, it is possible to directly run redoc.py to generate a particular piece of documentation. This may be necessary if, for example, it is impossible to structure your Reframe test in the structure necessary for redoc_tagged.sh, as described in step 1 above. It takes 5 keyword arguments:
+- config.json: Redoc config file. In order to run redoc_tagged.sh, it must be populated with some basic information about Reframe and lmod on your system.
+- redoc.py: Generates a doc for a software module from a Reframe regression test. The Reframe test must have been run before. Typically, this script is not run directly; rather, it is called by redoc_tagged.sh. However, it is possible to directly run redoc.py to generate a particular piece of documentation. This may be necessary if, for example, it is impossible to structure your Reframe test in the structure necessary for redoc_tagged.sh, as described in step 1 above. It takes 5 keyword arguments:
   1. -m (required): The name of the module for which to generate documentation.
-  2. -o (required): The path to the output directory of the reframe test to be used.
-  3. -s (optional): The path to the source directory of the reframe test to be used. Should only be omitted if exercise does not require any files.
+  2. -o (required): The path to the output directory of the Reframe test to be used.
+  3. -s (optional): The path to the source directory of the Reframe test to be used. Should only be omitted if exercise does not require any files.
   4. -l (optional): The path to lmodrc.lua.
   5. -p (optional): The path to lmod spider.
   

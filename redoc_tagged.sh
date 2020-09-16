@@ -76,24 +76,31 @@ do
     module="$(echo "$line" | rev | cut -d '/' -f 2 | rev)"
     rt="$(echo "$line" | cut -d ' ' -f 2)"
     echo -n "    $module ($rt):"
-    pyfile="$(echo "$line" | cut -d ' ' -f 5 | cut -d ')' -f 1)"
+#    pyfile="$(echo "$line" | cut -d ' ' -f 5 | cut -d ')' -f 1)"
 
     # Check if documentation already exists
     if [ -f "$docs/${module}.md" ]
     then
-        echo " Warning: '$docs/${module}.md' already exists. Skipping this doc."
+        echo -e " \e[33mSkipping this doc\e[0m ('$docs/${module}.md' already exists)."
         continue
     fi
 
-    # Make sure source directory is named src and located where expected
-    if grep -q 'self.sourcesdir =' "$pyfile"
-    then
-        if ! [ "$(grep -c 'self.sourcesdir = None' "$pyfile")" -eq "$(grep -c 'self.sourcesdir =' "$pyfile")" ]
-        then
-            echo " Warning: Did not generate doc- Non-standard src directory."
-            continue
-        fi
-    fi
+    # Make sure source directory is named src and locate
+    # Edit: I believe this check does more harm than good as not everyone writes python the same way.
+    # Additionally, if even ONE Reframe test does not have the right src folder,
+    # this check blocks ALL tests for that module, which may be undesired.
+    # It is better this way, although tests with bad source folders will have bad docs that do not list
+    # files correctly.
+#    if grep -q 'self.sourcesdir =' "$pyfile"
+#    then
+#        if ! [ "$(grep -c 'self.sourcesdir = None' "$pyfile")" -eq "$(grep -c 'self.sourcesdir =' "$pyfile")" ]
+#        then
+#            echo -e " \e[31mWarning: Did not generate doc\e[0m (Non-standard src directory)."
+#            continue
+#        fi
+#    fi
+
+    # Determine whether src directory is used
     src_dir="$reframe_test_directory/$module/src"
     if [ -d "$src_dir" ]
     then
@@ -119,12 +126,26 @@ do
     # Ensure that output directory exists
     if [ ! -d "$output_dir" ]
     then
-        echo " Warning: Did not generate doc- Output directory still not found."
+        echo -e " \e[31mWarning: Did not generate doc\e[0m (Output directory still not found- Reframe test probably failed)."
+        continue
+    fi
+
+    # Make sure output directory is not empty (it is empty if reframe check fails)
+    if [ -z "$(ls -A "$output_dir")" ]
+    then
+        echo -e " \e[31mWarning: Did not generate doc\e[0m (Output directory is empty- Reframe test probably failed)."
         continue
     fi
 
     # Call redoc script on reframe test
-    python redoc.py -m "$module" $src_dir_flag $lmodrc_lua_flag $lmod_spider_flag -o "$output_dir"
+    # Note: Do not follow shellcheck advice for line below- it will break
+    redoc_output="$(python redoc.py -m "$module" $src_dir_flag $lmodrc_lua_flag $lmod_spider_flag -o "$output_dir")"
+    if [ "$?" -eq "0" ]
+    then
+        echo -e "\e[32m$redoc_output\e[0m"
+    else
+        echo -e " \e[31mWarning: Did not generate doc\e[0m (redoc.py threw an unexpected error- see error summary)."
+    fi
 
 done
 
