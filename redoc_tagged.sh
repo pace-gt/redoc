@@ -79,11 +79,11 @@ do
     pyfile="$(echo "$line" | cut -d ' ' -f 5 | cut -d ')' -f 1)"
 
     # Check if documentation already exists
-#    if [ -f "$docs/${module}.md" ]
-#    then
-#        echo " Warning: Did not generate doc- '$docs/${module}.md' already exists."
-#        continue
-#    fi
+    if [ -f "$docs/${module}.md" ]
+    then
+        echo " Warning: '$docs/${module}.md' already exists. Skipping this doc."
+        continue
+    fi
 
     # Make sure source directory is named src and located where expected
     if grep -q 'self.sourcesdir =' "$pyfile"

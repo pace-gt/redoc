@@ -142,13 +142,13 @@ if os.path.exists(build_shell_file_path):
 else:
     build_shell = ''
 combined_shell = build_shell + job_shell
+source_files = []
+input_files = []
+input_directories = []
 if args.src_dir is not None:
     src_files = os.listdir(src_dir)
     relevant_src_files = []
     find_relevant(src_files, combined_shell, relevant_src_files)
-    source_files = []
-    input_files = []
-    input_directories = []
     for src_file in relevant_src_files:
         full_path = '{}/{}'.format(src_dir, src_file)
         if os.path.isdir(full_path):
@@ -157,9 +157,6 @@ if args.src_dir is not None:
             source_files.append(src_file)
         else:
             input_files.append(src_file)
-else:
-    source_files = []
-    input_files = []
 
 # Determine template variable 'repository'
 repository = args.src_dir
