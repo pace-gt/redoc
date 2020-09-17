@@ -110,10 +110,11 @@ do
     fi
 
     # Determine output directory location of reframe test
-    rt_description="$(reframe -C "$reframe_config_file" --prefix "$reframe_prefix" -c "$reframe_test_directory" -R -n "$rt" -L)"
+    rt_description="$(reframe -C "$reframe_config_file" --prefix "$reframe_prefix" -c "$reframe_test_directory" -R -n "^${rt}\$" -L)"
     system="$(echo "$rt_description" | grep systems: | cut -d ' ' -f 9 | cut -d ',' -f 1 | tr ':' '/')"
     environment="$(echo "$rt_description" | grep environments: | cut -d ' ' -f 9 | cut -d ',' -f 1)"
     output_dir="$reframe_prefix/output/$system/$environment/$rt"
+    echo $system #######
 
     # If output directory does not exist, generate it by running reframe test
     if [ ! -d "$output_dir" ]
@@ -126,7 +127,7 @@ do
     # Ensure that output directory exists
     if [ ! -d "$output_dir" ]
     then
-        echo -e " \e[31mWarning: Did not generate doc\e[0m (Output directory still not found- Reframe test probably failed)."
+        echo -e " \e[31mWarning: Did not generate doc\e[0m (This script cannot determine correct output directory)."
         continue
     fi
 
