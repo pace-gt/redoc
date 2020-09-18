@@ -69,7 +69,9 @@ then
 fi
 
 # Main loop
-echo "$lines" | while read line ;
+linesfile="$(mktemp)"
+echo "$lines" > "$linesfile"
+while read line <&3
 do
 
     # Determine basic information about reframe test
@@ -84,21 +86,6 @@ do
         echo -e " \e[33mSkipping this doc\e[0m ('$docs/${module}.md' already exists)."
         continue
     fi
-
-    # Make sure source directory is named src and locate
-    # Edit: I believe this check does more harm than good as not everyone writes python the same way.
-    # Additionally, if even ONE Reframe test does not have the right src folder,
-    # this check blocks ALL tests for that module, which may be undesired.
-    # It is better this way, although tests with bad source folders will have bad docs that do not list
-    # files correctly.
-#    if grep -q 'self.sourcesdir =' "$pyfile"
-#    then
-#        if ! [ "$(grep -c 'self.sourcesdir = None' "$pyfile")" -eq "$(grep -c 'self.sourcesdir =' "$pyfile")" ]
-#        then
-#            echo -e " \e[31mWarning: Did not generate doc\e[0m (Non-standard src directory)."
-#            continue
-#        fi
-#    fi
 
     # Determine whether src directory is used
     src_dir="$reframe_test_directory/$module/src"
@@ -147,7 +134,9 @@ do
         echo -e " \e[31mWarning: Did not generate doc\e[0m (redoc.py threw an unexpected error- see error summary)."
     fi
 
-done
+# End loop
+done 3<"$linesfile"
+rm "$linesfile"
 
 # Announce end of loop
 echo Done.
