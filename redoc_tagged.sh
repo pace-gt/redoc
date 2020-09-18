@@ -114,7 +114,6 @@ do
     system="$(echo "$rt_description" | grep systems: | cut -d ' ' -f 9 | cut -d ',' -f 1 | tr ':' '/')"
     environment="$(echo "$rt_description" | grep environments: | cut -d ' ' -f 9 | cut -d ',' -f 1)"
     output_dir="$reframe_prefix/output/$system/$environment/$rt"
-    echo $system #######
 
     # If output directory does not exist, generate it by running reframe test
     if [ ! -d "$output_dir" ]
