@@ -125,7 +125,7 @@ do
     fi
 
     # Call redoc script on reframe test
-    # Note: Do not follow shellcheck advice for line below- it will break
+    # shellcheck disable=SC2086
     redoc_output="$(python redoc.py -m "$module" $src_dir_flag $lmodrc_lua_flag $lmod_spider_flag -o "$output_dir")"
     if [ "$?" -eq "0" ]
     then

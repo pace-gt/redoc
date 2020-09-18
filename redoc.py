@@ -91,6 +91,18 @@ else:
 # 'input_files', and 'input_directories'
 
 
+# Determine whether a file is a binary
+def is_binary(file_path):
+    binary_reader = open(file_path, 'rb')
+    binary_reader.read()  # Ensures there is no other error (e.g. permissions)
+    text_reader = open(file_path, 'r')
+    try:
+        text_reader.read()
+        return False
+    except:  # noqa: E722
+        return True
+
+
 # Determine whether files in src are relevant to this exercise
 def find_relevant(src_files, text, relevant_src_files):
     for src_file in src_files:
@@ -101,18 +113,10 @@ def find_relevant(src_files, text, relevant_src_files):
         if name_noext in text and (src_file not in relevant_src_files):
             relevant_src_files.append(src_file)
             file_path = '{}/{}'.format(src_dir, src_file)
-            if os.path.isfile(file_path):
+            if os.path.isfile(file_path) and not is_binary(file_path):
                 reader = open(file_path, 'r')
-                try:
-                    new_text = reader.read()
-                    find_relevant(src_files, new_text, relevant_src_files)
-                except:
-                    try:
-                        binary_reader = open(file_path, 'rb')
-                        binary_reader.read()
-                    except:
-                        raise Exception("Unable to read file '{}'."
-                                        .format(src_file))
+                new_text = reader.read()
+                find_relevant(src_files, new_text, relevant_src_files)
 
 
 # Determine whether a file in src is a source file or an input file
@@ -257,14 +261,18 @@ env = jinja2.Environment(
 
 # Define function for use in template. Returns file contents.
 def include_src_file(src_file):
-    line_limit = 50
-    max_line_length = 120
     file_path = '{}/{}'.format(src_dir, src_file)
-    reader = open(file_path, 'r')
-    ret_lines = []
-    line_num = 0
-    limit_reached = False
-    try:
+    if is_binary(file_path):
+        return ("(Unable to show preview of file"
+                " '{}' because it is a binary.)".format(src_file))
+
+    else:
+        line_limit = 50
+        max_line_length = 120
+        ret_lines = []
+        line_num = 0
+        limit_reached = False
+        reader = open(file_path, 'r')
         for line in reader:
             if line_num < line_limit:
                 if len(line) <= max_line_length:
@@ -277,14 +285,6 @@ def include_src_file(src_file):
         if limit_reached:
             ret_lines.append('.\n.\n.\n')
         return ''.join(ret_lines)
-    except:
-        try:
-            binary_reader = open(file_path, 'rb')
-            binary_reader.read()
-            return ("(Unable to show preview of file"
-                    " '{}' because it is a binary.)".format(src_file))
-        except:
-            raise Exception("Unable to read file '{}'.".format(src_file))
 
 
 # Define function for use in template. Returns directory contents.
