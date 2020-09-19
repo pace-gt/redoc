@@ -68,6 +68,10 @@ then
     exit 0
 fi
 
+# Initialize error summary
+error_summary_header="Error Summary:"
+error_summary="$error_summary_header"
+
 # Main loop
 linesfile="$(mktemp)"
 echo "$lines" > "$linesfile"
@@ -78,9 +82,8 @@ do
     module="$(echo "$line" | rev | cut -d '/' -f 2 | rev)"
     rt="$(echo "$line" | cut -d ' ' -f 2)"
     echo -n "    $module ($rt):"
-#    pyfile="$(echo "$line" | cut -d ' ' -f 5 | cut -d ')' -f 1)"
 
-    # Check if documentation already exists
+    # Check if documentation already exists (comment out this block to overwrite docs)
     if [ -f "$docs/${module}.md" ]
     then
         echo -e " \e[33mSkipping this doc\e[0m ('$docs/${module}.md' already exists)."
@@ -126,12 +129,21 @@ do
 
     # Call redoc script on reframe test
     # shellcheck disable=SC2086
-    redoc_output="$(python redoc.py -m "$module" $src_dir_flag $lmodrc_lua_flag $lmod_spider_flag -o "$output_dir")"
+    redoc_output="$(python redoc.py -m "$module" $src_dir_flag $lmodrc_lua_flag $lmod_spider_flag -o "$output_dir" 2>&1)"
     if [ "$?" -eq "0" ]
     then
         echo -e "\e[32m$redoc_output\e[0m"
     else
-        echo -e " \e[31mWarning: Did not generate doc\e[0m (redoc.py threw an unexpected error- see error summary)."
+        echo -e " \e[31mWarning: Did not generate doc\e[0m (Unexpected error ocurred in redoc.py- see error summary)."
+        read -r -d '' error_summary <<- EOM
+$error_summary
+
+module: $module
+call line: python redoc.py -m $module $src_dir_flag $lmodrc_lua_flag $lmod_spider_flag -o $output_dir
+error:
+$redoc_output
+EOM
+        error_summary="${error_summary}\n\nmodule: ${module}\ncall line: python redoc.py -m $module $src_dir_flag $lmodrc_lua_flag $lmod_spider_flag -o ${output_dir}\nerror: $redoc_output"
     fi
 
 # End loop
@@ -145,3 +157,10 @@ echo
 # Remove any files created by reframe
 rm reframe.log 1>/dev/null 2>/dev/null
 rm reframe.out 1>/dev/null 2>/dev/null
+
+# Print error summary
+if [ "$error_summary" != "$error_summary_header" ]
+then
+    echo "$error_summary"
+    echo
+fi
