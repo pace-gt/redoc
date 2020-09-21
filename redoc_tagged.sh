@@ -132,7 +132,7 @@ do
     redoc_output="$(python redoc.py -m "$module" $src_dir_flag $lmodrc_lua_flag $lmod_spider_flag -o "$output_dir" 2>&1)"
     if [ "$?" -eq "0" ]
     then
-        echo -e "\e[32m$redoc_output\e[0m"
+        echo -e " \e[32m$redoc_output\e[0m"
     else
         echo -e " \e[31mWarning: Did not generate doc\e[0m (Unexpected error ocurred in redoc.py- see error summary)."
         read -r -d '' error_summary <<- EOM

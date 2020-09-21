@@ -331,4 +331,4 @@ if os.path.exists(doc_name):
     os.remove(doc_name)
 writer = open(doc_name, 'w')
 writer.write(populated)
-print(' Doc generated!')
+print('Doc generated!')
