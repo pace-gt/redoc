@@ -204,18 +204,18 @@ empty_spaces_patt = re.compile('^  ')
 module_load_patt = re.compile('^module load \\S+$')
 rm_patt = re.compile('^rm')
 cat_patt = re.compile('^cat')
-mpirun_patt = re.compile('mpirun[^;\n]*[ml][ls];?$')
-mpirun_inline_patt = re.compile('mpirun[^;\n]*[ml][ls];.+$')
+mpirun_patt = re.compile('mpi[re][ux][ne]c?[^;\n]*[ml][ls];?$')
+mpirun_inline_patt = re.compile('mpi[re][ux][ne]c?[^;\n]*[ml][ls];.+$')
 attribution_patt = re.compile(r'^\s*#+\s*[Aa]ttribution: ')
 attribution_capture_patt = re.compile(r'^\s*#+\s*[Aa]ttribution: ([\S\s]*)$')
 attribution = ''
 new_run_command_lines = []
 for line in run_command_lines:
     if line.strip():
-        if empty_space_patt.match(line) and not empty_spaces_patt.match(line):
-            line = line[1:]
         if mpirun_inline_patt.match(line):
             line = line[line.find(';')+1:]
+        if empty_space_patt.match(line) and not empty_spaces_patt.match(line):
+            line = line[1:]
         if mpirun_patt.match(line):
             pass
         elif module_load_patt.match(line):
