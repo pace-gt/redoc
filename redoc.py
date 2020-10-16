@@ -171,7 +171,7 @@ repository = args.src_dir
 # Determine whether a line in 'run_commands' compiles source code
 def starts_with_compiler(line):
     compilers = ['mpiicpc', 'cc', 'gcc', 'icc', 'icpc', 'javac', 'gfortran',
-                 'ifort', 'nagfor']  # Add more
+                 'ifort', 'nagfor', 'mpicc', 'mpiifort']  # Add more
     for compiler in compilers:
         pattern = '^{} [\\S\\s]+$'.format(compiler)
         if re.match(pattern, line):
