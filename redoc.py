@@ -171,7 +171,8 @@ repository = args.src_dir
 # Determine whether a line in 'run_commands' compiles source code
 def starts_with_compiler(line):
     compilers = ['mpiicpc', 'cc', 'gcc', 'icc', 'icpc', 'javac', 'gfortran',
-                 'ifort', 'nagfor', 'mpicc', 'mpiifort']  # Add more
+                 'ifort', 'nagfor', 'mpicc', 'mpiifort', 'mpicxx',
+                 'mpiicxx']  # Add more
     for compiler in compilers:
         pattern = '^{} [\\S\\s]+$'.format(compiler)
         if re.match(pattern, line):
@@ -197,7 +198,6 @@ run_command_lines = run_commands.splitlines()
 module_load_lines = []
 compile_comment = False
 remove_comment = False
-run_comment = False
 cat_comment = False
 empty_space_patt = re.compile('^ ')
 empty_spaces_patt = re.compile('^  ')
@@ -244,12 +244,11 @@ for line in run_command_lines:
         elif attribution_patt.match(line):
             attribution = attribution_capture_patt.match(line).group(1)
         else:
-            if not run_comment:
-                new_run_command_lines.append('\n# Run exercise')
-                run_comment = True
+            new_run_command_lines.append('\n# Run exercise')
             new_run_command_lines.append(line)
 while new_run_command_lines.count('\n# Run exercise') > 1:
-    new_run_command_lines.remove('\n# Run exercise')
+    index = new_run_command_lines.index('\n# Run exercise')
+    new_run_command_lines[index] = '\n# Prepare exercise'
 run_commands = os.linesep.join(new_run_command_lines)
 
 # Configure jinja
