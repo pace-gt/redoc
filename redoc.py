@@ -277,7 +277,7 @@ def include_src_file(src_file):
                 if len(line) <= max_line_length:
                     ret_lines.append(line)
                 else:
-                    ret_lines.append(line[:max_line_length - 3] + '...')
+                    ret_lines.append(line[:max_line_length - 3] + '...\n')
             else:
                 limit_reached = True
             line_num += 1
