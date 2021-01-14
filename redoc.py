@@ -67,7 +67,7 @@ if (args.lmodrc_lua is not None) and (args.lmod_spider is not None):
     module_data = json.loads(module_data_json)
     for package in module_data:
         if package['package'] == module:
-            if 'help' in package['versions'][0]:
+            if len(package['versions']) > 0 and 'help' in package['versions'][0]:
                 module_help = package['versions'][0]['help']
                 break
     if re.match(r'^\s*module load.*', module_help):  # Prevents useless text
